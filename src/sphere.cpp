@@ -14,16 +14,16 @@ namespace RayTracer {
             if(t < t_max && t > t_min)
             {
                 rec.t = t;
-                rec.p = r.at(rec.t);
-                rec.normal = (rec.p - _m_center) / _m_radius;
+                rec.hit_pos = r.at(rec.t);
+                rec.normal = (rec.hit_pos - _m_center) / _m_radius;
                 return true;
             }
             t = (-b + sqrt(discriminant)) / (2.0 * a);
             if(t < t_max && t > t_min)
             {
                 rec.t = t;
-                rec.p = r.at(rec.t);
-                rec.normal = (rec.p - _m_center) / _m_radius;
+                rec.hit_pos = r.at(rec.t);
+                rec.normal = (rec.hit_pos - _m_center) / _m_radius;
                 return true;
             }
         }

@@ -7,7 +7,7 @@ namespace RayTracer
     struct hit_record 
     {
         double t;
-        vec3 p;
+        vec3 hit_pos;
         vec3 normal;
     };
 

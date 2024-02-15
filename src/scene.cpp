@@ -9,8 +9,8 @@ namespace RayTracer
         hit_record rec;
         if(on_hit(r, 0.001, MAXFLOAT, rec))
         {
-            vec3 target = rec.p + rec.normal + sphere::random_in_unit_sphere();
-            return 0.5 * color3(trace(ray(rec.p, target - rec.p)));
+            vec3 target = rec.hit_pos + rec.normal + sphere::random_in_unit_sphere();
+            return 0.5 * color3(trace(ray(rec.hit_pos, target - rec.hit_pos)));
         }
         else
         {
