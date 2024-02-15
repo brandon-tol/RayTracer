@@ -4,7 +4,8 @@
 
 namespace RayTracer
 {
-    class viewport {
+    class viewport 
+    {
     private:
         int _m_width;
         int _m_height;

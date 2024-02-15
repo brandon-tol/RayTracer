@@ -1,31 +1,25 @@
 #pragma once
 #include "structures.h"
+#include "eye.h"
+#include "ray.h"
+#include "scene_object.h"
 
 namespace RayTracer
 {
-    class scene
+    class scene : public scene_object
     {
     public:
-        scene() {}
+        scene(eye eye, const scene_object** objects, size_t list_count): _m_eye(eye), _m_objects(objects), _m_list_count(list_count) {}
+        ~scene() {}
 
-        static bool hits_sphere(const ray& r, const point3& center, double radius)
-        {
-            vec3 oc = r.origin() - center;
-            auto a = r.direction().squaredNorm();
-            auto half_b = oc.dot(r.direction());
-            auto c = oc.squaredNorm() - radius * radius;
-            auto discriminant = half_b * half_b - a * c;
-            return discriminant > 0;
-        }
+        const eye &get_eye() const { return _m_eye; }
 
-        static color3 trace(const ray& r)
-        {
-            if (hits_sphere(r, point3(-10, 0, 5), 1.0))
-            {
-                return color3(1, 0, 0);
-            }
-            auto a = (r.direction().normalized().y() + 1.0) * 0.5;
-            return (a * color3(0.5, 0.7, 1.0)) + ((1.0 - a) * color3(1.0, 1.0, 1.0));
-        }
+        color3 trace(const ray& r) const;
+
+        virtual bool on_hit(const ray& r, double t_min, double t_max, hit_record& rec) const override;
+    private:
+        eye _m_eye;
+        const scene_object **_m_objects;
+        size_t _m_list_count;
     };
 } // namespace RayTracer
