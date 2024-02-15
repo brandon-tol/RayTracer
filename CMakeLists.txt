@@ -26,7 +26,7 @@ file(GLOB_RECURSE SOURCES
 file(GLOB_RECURSE HEADERS
     src/*.h)
 
-add_executable(RayTracer ${SOURCES})
+add_executable(RayTracer ${SOURCES} ${HEADERS})
 
 target_include_directories(RayTracer
     PRIVATE
