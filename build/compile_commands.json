@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/brandon/RayTracingInOneWeekend/RayTracer/build",
+  "command": "/usr/bin/g++  -I/home/brandon/RayTracingInOneWeekend/RayTracer/lib/eigen -I/home/brandon/RayTracingInOneWeekend/RayTracer/src -I/home/brandon/RayTracingInOneWeekend/RayTracer/include -I/home/brandon/RayTracingInOneWeekend/RayTracer/external -g -std=gnu++17 -o CMakeFiles/RayTracer.dir/external/simpleppm.cpp.o -c /home/brandon/RayTracingInOneWeekend/RayTracer/external/simpleppm.cpp",
+  "file": "/home/brandon/RayTracingInOneWeekend/RayTracer/external/simpleppm.cpp"
+},
+{
+  "directory": "/home/brandon/RayTracingInOneWeekend/RayTracer/build",
+  "command": "/usr/bin/g++  -I/home/brandon/RayTracingInOneWeekend/RayTracer/lib/eigen -I/home/brandon/RayTracingInOneWeekend/RayTracer/src -I/home/brandon/RayTracingInOneWeekend/RayTracer/include -I/home/brandon/RayTracingInOneWeekend/RayTracer/external -g -std=gnu++17 -o CMakeFiles/RayTracer.dir/external/test_eigen.cpp.o -c /home/brandon/RayTracingInOneWeekend/RayTracer/external/test_eigen.cpp",
+  "file": "/home/brandon/RayTracingInOneWeekend/RayTracer/external/test_eigen.cpp"
+},
+{
+  "directory": "/home/brandon/RayTracingInOneWeekend/RayTracer/build",
+  "command": "/usr/bin/g++  -I/home/brandon/RayTracingInOneWeekend/RayTracer/lib/eigen -I/home/brandon/RayTracingInOneWeekend/RayTracer/src -I/home/brandon/RayTracingInOneWeekend/RayTracer/include -I/home/brandon/RayTracingInOneWeekend/RayTracer/external -g -std=gnu++17 -o CMakeFiles/RayTracer.dir/external/test_json.cpp.o -c /home/brandon/RayTracingInOneWeekend/RayTracer/external/test_json.cpp",
+  "file": "/home/brandon/RayTracingInOneWeekend/RayTracer/external/test_json.cpp"
+},
+{
+  "directory": "/home/brandon/RayTracingInOneWeekend/RayTracer/build",
+  "command": "/usr/bin/g++  -I/home/brandon/RayTracingInOneWeekend/RayTracer/lib/eigen -I/home/brandon/RayTracingInOneWeekend/RayTracer/src -I/home/brandon/RayTracingInOneWeekend/RayTracer/include -I/home/brandon/RayTracingInOneWeekend/RayTracer/external -g -std=gnu++17 -o CMakeFiles/RayTracer.dir/external/test_ppm.cpp.o -c /home/brandon/RayTracingInOneWeekend/RayTracer/external/test_ppm.cpp",
+  "file": "/home/brandon/RayTracingInOneWeekend/RayTracer/external/test_ppm.cpp"
+},
+{
+  "directory": "/home/brandon/RayTracingInOneWeekend/RayTracer/build",
+  "command": "/usr/bin/g++  -I/home/brandon/RayTracingInOneWeekend/RayTracer/lib/eigen -I/home/brandon/RayTracingInOneWeekend/RayTracer/src -I/home/brandon/RayTracingInOneWeekend/RayTracer/include -I/home/brandon/RayTracingInOneWeekend/RayTracer/external -g -std=gnu++17 -o CMakeFiles/RayTracer.dir/src/main.cpp.o -c /home/brandon/RayTracingInOneWeekend/RayTracer/src/main.cpp",
+  "file": "/home/brandon/RayTracingInOneWeekend/RayTracer/src/main.cpp"
+},
+{
+  "directory": "/home/brandon/RayTracingInOneWeekend/RayTracer/build",
+  "command": "/usr/bin/g++  -I/home/brandon/RayTracingInOneWeekend/RayTracer/lib/eigen -I/home/brandon/RayTracingInOneWeekend/RayTracer/src -I/home/brandon/RayTracingInOneWeekend/RayTracer/include -I/home/brandon/RayTracingInOneWeekend/RayTracer/external -g -std=gnu++17 -o CMakeFiles/RayTracer.dir/src/ray_tracer.cpp.o -c /home/brandon/RayTracingInOneWeekend/RayTracer/src/ray_tracer.cpp",
+  "file": "/home/brandon/RayTracingInOneWeekend/RayTracer/src/ray_tracer.cpp"
+}
+]

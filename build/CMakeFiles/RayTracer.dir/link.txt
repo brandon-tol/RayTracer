@@ -1,0 +1,1 @@
+/usr/bin/g++ -g CMakeFiles/RayTracer.dir/external/simpleppm.cpp.o CMakeFiles/RayTracer.dir/external/test_eigen.cpp.o CMakeFiles/RayTracer.dir/external/test_json.cpp.o CMakeFiles/RayTracer.dir/external/test_ppm.cpp.o CMakeFiles/RayTracer.dir/src/main.cpp.o CMakeFiles/RayTracer.dir/src/ray_tracer.cpp.o -o RayTracer 

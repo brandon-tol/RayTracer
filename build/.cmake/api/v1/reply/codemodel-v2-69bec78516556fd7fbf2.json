@@ -1,0 +1,249 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "lib/eigen",
+					"childIndexes" : 
+					[
+						2,
+						3,
+						4,
+						7,
+						8
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-lib.eigen-Debug-2f3d1dd238af752167eb.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "lib/eigen",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "lib/eigen/blas",
+					"jsonFile" : "directory-lib.eigen.blas-Debug-9750cd913211239abea5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 2,
+					"source" : "lib/eigen/blas"
+				},
+				{
+					"build" : "lib/eigen/lapack",
+					"jsonFile" : "directory-lib.eigen.lapack-Debug-ae29fffe58f834af3e20.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 3,
+					"source" : "lib/eigen/lapack"
+				},
+				{
+					"build" : "lib/eigen/unsupported",
+					"childIndexes" : 
+					[
+						5
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-lib.eigen.unsupported-Debug-8d14452620c51b349242.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "lib/eigen/unsupported"
+				},
+				{
+					"build" : "lib/eigen/unsupported/Eigen",
+					"childIndexes" : 
+					[
+						6
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-lib.eigen.unsupported.Eigen-Debug-21b764d4e746cbef744c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 4,
+					"projectIndex" : 1,
+					"source" : "lib/eigen/unsupported/Eigen"
+				},
+				{
+					"build" : "lib/eigen/unsupported/Eigen/CXX11",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-lib.eigen.unsupported.Eigen.CXX11-Debug-73f6aa5b56cc1312f00b.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 5,
+					"projectIndex" : 1,
+					"source" : "lib/eigen/unsupported/Eigen/CXX11"
+				},
+				{
+					"build" : "lib/eigen/demos",
+					"jsonFile" : "directory-lib.eigen.demos-Debug-7f16e6fd84e268675ca7.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 4,
+					"source" : "lib/eigen/demos",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "lib/eigen/scripts",
+					"jsonFile" : "directory-lib.eigen.scripts-Debug-28db00af8be0aa8d9fea.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.0"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "lib/eigen/scripts"
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "RayTracer",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"childIndexes" : 
+					[
+						2,
+						3,
+						4
+					],
+					"directoryIndexes" : 
+					[
+						1,
+						4,
+						5,
+						6,
+						8
+					],
+					"name" : "Eigen3",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "EigenBlas",
+					"parentIndex" : 1
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "EigenLapack",
+					"parentIndex" : 1
+				},
+				{
+					"directoryIndexes" : 
+					[
+						7
+					],
+					"name" : "EigenDemos",
+					"parentIndex" : 1,
+					"targetIndexes" : 
+					[
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "RayTracer::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RayTracer-Debug-a86829aebab97e0d2ca0.json",
+					"name" : "RayTracer",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "demos::@0a1934a8aaf80b793234",
+					"jsonFile" : "target-demos-Debug-f4eced98f885fd18f70f.json",
+					"name" : "demos",
+					"projectIndex" : 4
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "uninstall::@05e8f5a314c605bdfc58",
+					"jsonFile" : "target-uninstall-Debug-f68dd0f1d7e70a2333c6.json",
+					"name" : "uninstall",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/brandon/RayTracingInOneWeekend/RayTracer/build",
+		"source" : "/home/brandon/RayTracingInOneWeekend/RayTracer"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
