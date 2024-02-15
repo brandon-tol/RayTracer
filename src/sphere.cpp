@@ -5,12 +5,13 @@ namespace RayTracer {
     {
         vec3 oc = r.origin() - _m_center;
         auto a = r.direction().squaredNorm();
-        auto b = 2.0 * oc.dot(r.direction());
+        auto half_b = oc.dot(r.direction());
         auto c = oc.squaredNorm() - _m_radius * _m_radius;
-        auto discriminant = b * b - 4.0 * a * c;
+        auto discriminant = half_b * half_b - a * c;
+        auto sqrt_discriminant = sqrt(discriminant);
         if(discriminant > 0)
         {
-            auto t = (-b - sqrt(discriminant)) / (2.0 * a);
+            auto t = (-half_b - sqrt_discriminant) / a;
             if(t < t_max && t > t_min)
             {
                 rec.t = t;
@@ -18,7 +19,7 @@ namespace RayTracer {
                 rec.normal = (rec.hit_pos - _m_center) / _m_radius;
                 return true;
             }
-            t = (-b + sqrt(discriminant)) / (2.0 * a);
+            t = (-half_b + sqrt_discriminant) / a;
             if(t < t_max && t > t_min)
             {
                 rec.t = t;
