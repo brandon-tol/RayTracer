@@ -16,7 +16,7 @@ int main()
     list[1] = new sphere(point3(0, -100.5, 1), 100);
     
     scene s(e, list, scene_size);
-    ray_tracer rt(width, height, s);
+    ray_tracer rt(width, height, s, 100);
     rt.generate_viewport();
     rt.print_viewport("test.ppm");
     return 0;

@@ -1,5 +1,6 @@
 #pragma once
 #include "structures.h"
+#include "ray.h"
 
 namespace RayTracer
 {

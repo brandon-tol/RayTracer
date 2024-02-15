@@ -1,4 +1,5 @@
 #include "scene.h"
+#include "sphere.h"
 
 namespace RayTracer
 {
@@ -8,7 +9,8 @@ namespace RayTracer
         hit_record rec;
         if(on_hit(r, 0.001, MAXFLOAT, rec))
         {
-           return 0.5 * color3(rec.normal.x() + 1, rec.normal.y() + 1, rec.normal.z() + 1);
+            vec3 target = rec.p + rec.normal + sphere::random_in_unit_sphere();
+            return 0.5 * color3(trace(ray(rec.p, target - rec.p)));
         }
         else
         {
