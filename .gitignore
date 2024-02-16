@@ -1,2 +1,5 @@
 # Ignore the binary directory
 /build/
+
+# Ignore the VS Code directory
+/.vscode/
