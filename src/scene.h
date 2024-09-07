@@ -27,8 +27,6 @@ namespace btoleda
         inline void set_ambient_intensity(const color3 &c) { _m_ambient_intensity = c; }
         inline const color3 &get_ambient_intensity() const { return _m_ambient_intensity; }
 
-        static const vec3 _reflect(const vec3 &incident, const vec3 &normal);
-
         const color3 trace(const ray &r, ray_tracer_parameters params) const;
 
         virtual bool on_hit(const ray &r, double t_min, double t_max, hit_record &rec) const override;
@@ -40,7 +38,7 @@ namespace btoleda
         std::vector<std::shared_ptr<scene_light>> _m_lights;
         color3 _m_ambient_intensity;
 
-        const color3 _get_color(const ray &r, color_type ct, bool twosiderender) const;
+        const color3 _get_color(const ray &r, color_type ct, bool twosiderender, bool usecenter) const;
         const color3 _path_trace(const ray &r, const int max_bounces_left, const double prob_terminate, bool twosiderender) const;
     };
 } // namespace btoleda

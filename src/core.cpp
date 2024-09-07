@@ -17,8 +17,9 @@ namespace btoleda
         raysperpixel[1] = 1;
         raysperpixel[2] = 1;
         twosiderender = true;
-        lighting = BLINN_PHONG;
+        globalillum = false;
+        lighting = PHONG;
         max_bounces = 0;
-        prob_terminate = 0.0;
+        prob_terminate = 100.0;
     }
 } // namespace btoleda

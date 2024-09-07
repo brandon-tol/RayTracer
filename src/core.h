@@ -20,6 +20,8 @@ namespace btoleda
     using color3 = Eigen::Vector3d;
     using point3 = Eigen::Vector3d;
     using vec3 = Eigen::Vector3d;
+    using vec4 = Eigen::Vector4d;
+    using mat4 = Eigen::Matrix4d;
 
     double random_double();
 
@@ -35,7 +37,8 @@ namespace btoleda
         AMBIENT = 0b001,
         DIFFUSE = 0b010,
         SPECULAR = 0b100,
-        HALF_APPROX = 0b1000
+        HALF_APPROX = 0b1000,
+        SHOW_BACKGROUND = 0b10000
     };
 
     struct ray_tracer_parameters

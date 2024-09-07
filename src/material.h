@@ -8,8 +8,8 @@ namespace btoleda
     class material
     {
     public:
-        inline material(const vec3 &ac, const vec3 &dc, const vec3 &sc, double ka, double kd, double ks, double pc)
-            : _m_ambient_color{ac}, _m_diffuse_color{dc}, _m_specular_color{sc}, _m_k_ambient{ka}, _m_k_diffuse{kd}, _m_k_specular{ks}, _m_pc{pc} {}
+        inline material(const vec3 &ac, const vec3 &dc, const vec3 &sc, double ka, double kd, double ks, double pc, double reflectance = 0.0)
+            : _m_ambient_color{ac}, _m_diffuse_color{dc}, _m_specular_color{sc}, _m_k_ambient{ka}, _m_k_diffuse{kd}, _m_k_specular{ks}, _m_pc{pc}, _m_reflectance{reflectance} {}
 
         inline const vec3 &ambient_color() const { return _m_ambient_color; }
         inline const vec3 &diffuse_color() const { return _m_diffuse_color; }
@@ -30,5 +30,6 @@ namespace btoleda
         double _m_k_specular;
 
         double _m_pc;
+        double _m_reflectance;
     };
 } // namespace btoleda

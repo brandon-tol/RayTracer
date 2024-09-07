@@ -26,7 +26,9 @@ namespace btoleda
 
         // 3. Create a coordinate system with the normal as the z-axis
         vec3 w = normal;
-        vec3 u = w.cross(vec3{w.z(), w.x(), w.y()}).normalized();
+        vec3 random{random_double() - 0.5, random_double() - 0.5, random_double() - 0.5};
+
+        vec3 u = w.cross(random).normalized();
         vec3 v = w.cross(u);
 
         // 4. Return the vector in the hemisphere
@@ -35,9 +37,9 @@ namespace btoleda
 
     const ray material::scatter(const point3 &impact, const vec3 &incident, const vec3 &normal) const
     {
-        if (random_double() < 1.0)
-            return ray{impact, s_random_in_unit_hemisphere(normal)};
-        else
+        if (random_double() < _m_reflectance)
             return ray{impact, s_reflect(incident, normal)};
+        else
+            return ray{impact, s_random_in_unit_hemisphere(normal)};
     }
 } // namespace btoleda

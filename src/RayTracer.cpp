@@ -1,5 +1,4 @@
 #define RELEASE_BUILD
-#define USE_BLINN_PHONG_LIGHT
 
 #include "RayTracer.h"
 #include "ray.h"
@@ -9,7 +8,10 @@
 #include "rectangle.h"
 #include "point_light.h"
 #include "area_light.h"
+
+#ifndef RELEASE_BUILD
 #include <iostream>
+#endif
 
 using namespace btoleda;
 
@@ -24,14 +26,23 @@ Eigen::Vector3d vec3_from_json(const nlohmann::json &j)
 
 const material material_from_json(const nlohmann::json &j)
 {
-    return {vec3_from_json(j["ac"]), vec3_from_json(j["dc"]), vec3_from_json(j["sc"]), j["ka"].get<double>(), j["kd"].get<double>(), j["ks"].get<double>(), j["pc"].get<double>()};
+    if (j.contains("reflectance"))
+    {
+        return {vec3_from_json(j["ac"]), vec3_from_json(j["dc"]), vec3_from_json(j["sc"]), j["ka"].get<double>(), j["kd"].get<double>(), j["ks"].get<double>(), j["pc"].get<double>(), j["reflectance"].get<double>()};
+    }
+    else
+    {
+        return {vec3_from_json(j["ac"]), vec3_from_json(j["dc"]), vec3_from_json(j["sc"]), j["ka"].get<double>(), j["kd"].get<double>(), j["ks"].get<double>(), j["pc"].get<double>()};
+    }
 }
 
 void RayTracer::run()
 {
     if (!_m_json.contains("geometry") || !_m_json.contains("light") || !_m_json.contains("output"))
     {
+#ifndef RELEASE_BUILD
         std::cout << "Please use a json which specifies geometry, light and output!" << std::endl;
+#endif
         return;
     }
     scene s{};
@@ -50,7 +61,14 @@ void RayTracer::run()
             double radius{scene_obj["radius"].get<double>()};
             if (scene_obj.contains("transform"))
             {
-                // TODO: Define transforms for spheres
+                auto transform_data = scene_obj["transform"].get<std::vector<double>>();
+                mat4 transform{transform_data.data()};
+                vec4 homogeneous_center{centre.x(), centre.y(), centre.z(), 1.0};
+                homogeneous_center = transform * homogeneous_center;
+                centre = homogeneous_center.head(3) / homogeneous_center.w();
+                vec4 homogeneous_radius{radius, radius, radius, 0.0};
+                homogeneous_radius = transform * homogeneous_radius;
+                radius = homogeneous_radius.x() + homogeneous_radius.y() + homogeneous_radius.z() / 3.0;
             }
             s.add_object(std::make_shared<sphere>(centre, radius, mat));
         }
@@ -62,7 +80,20 @@ void RayTracer::run()
             point3 p3 = vec3_from_json(scene_obj["p4"]);
             if (scene_obj.contains("transform"))
             {
-                // TODO: Define transforms for rectangles/area lights
+                auto transform_data = scene_obj["transform"].get<std::vector<double>>();
+                mat4 transform{transform_data.data()};
+                vec4 homogeneous_p0{p0.x(), p0.y(), p0.z(), 1.0};
+                vec4 homogeneous_p1{p1.x(), p1.y(), p1.z(), 1.0};
+                vec4 homogeneous_p2{p2.x(), p2.y(), p2.z(), 1.0};
+                vec4 homogeneous_p3{p3.x(), p3.y(), p3.z(), 1.0};
+                homogeneous_p0 = transform * homogeneous_p0;
+                homogeneous_p1 = transform * homogeneous_p1;
+                homogeneous_p2 = transform * homogeneous_p2;
+                homogeneous_p3 = transform * homogeneous_p3;
+                p0 = homogeneous_p0.head(3) / homogeneous_p0.w();
+                p1 = homogeneous_p1.head(3) / homogeneous_p1.w();
+                p2 = homogeneous_p2.head(3) / homogeneous_p2.w();
+                p3 = homogeneous_p3.head(3) / homogeneous_p3.w();
             }
             s.add_object(std::make_shared<rectangle>(p0, p1, p2, p3, mat));
         }
@@ -88,7 +119,11 @@ void RayTracer::run()
             vec3 is = vec3_from_json(light["is"]);
             if (light.contains("transform"))
             {
-                // TODO: Define transforms for point lights
+                auto transform_data = light["transform"].get<std::vector<double>>();
+                mat4 transform{transform_data.data()};
+                vec4 homogeneous_center{center.x(), center.y(), center.z(), 1.0};
+                homogeneous_center = transform * homogeneous_center;
+                center = homogeneous_center.head(3) / homogeneous_center.w();
             }
             s.add_light(std::make_shared<point_light>(id, is, center));
         }
@@ -103,7 +138,20 @@ void RayTracer::run()
             const unsigned int n = light["n"].get<int>();
             if (light.contains("transform"))
             {
-                // TODO: Define transforms for area lights/rectangles
+                auto transform_data = light["transform"].get<std::vector<double>>();
+                mat4 transform{transform_data.data()};
+                vec4 homogeneous_p0{p0.x(), p0.y(), p0.z(), 1.0};
+                vec4 homogeneous_p1{p1.x(), p1.y(), p1.z(), 1.0};
+                vec4 homogeneous_p2{p2.x(), p2.y(), p2.z(), 1.0};
+                vec4 homogeneous_p3{p3.x(), p3.y(), p3.z(), 1.0};
+                homogeneous_p0 = transform * homogeneous_p0;
+                homogeneous_p1 = transform * homogeneous_p1;
+                homogeneous_p2 = transform * homogeneous_p2;
+                homogeneous_p3 = transform * homogeneous_p3;
+                p0 = homogeneous_p0.head(3) / homogeneous_p0.w();
+                p1 = homogeneous_p1.head(3) / homogeneous_p1.w();
+                p2 = homogeneous_p2.head(3) / homogeneous_p2.w();
+                p3 = homogeneous_p3.head(3) / homogeneous_p3.w();
             }
             if (light.contains("usecenter") && light["usecenter"].get<bool>())
             {
@@ -145,16 +193,17 @@ void RayTracer::run()
 
         s.set_background(vec3_from_json(output["bkc"]));
 
-        params.lighting = BLINN_PHONG; // Default value
-
+        params.lighting = PHONG; // Default value
+        params.globalillum = false;
         params.twosiderender = true; // Default value
         if (output.contains("twosiderender") && !output["twosiderender"].get<bool>())
         {
             params.twosiderender = false;
         }
 
-        if (output.contains("globalillum") && output["globalillum"].get<bool>())
+        if (output.contains("globalillum") && output["globalillum"].get<bool>() && !(output.contains("maxbounces") && output["maxbounces"].get<int>() < 1))
         {
+            params.globalillum = true;
             params.lighting = PATH_TRACING;
             if (output.contains("raysperpixel"))
             {
@@ -180,9 +229,9 @@ void RayTracer::run()
             }
             else
             {
-                params.raysperpixel[0] = 5;
-                params.raysperpixel[1] = 5;
-                params.raysperpixel[2] = 5;
+                params.raysperpixel[0] = 10;
+                params.raysperpixel[1] = 10;
+                params.raysperpixel[2] = 10;
             }
 
             if (output.contains("maxbounces"))
@@ -200,7 +249,7 @@ void RayTracer::run()
             }
             else
             {
-                params.prob_terminate = 0.5;
+                params.prob_terminate = 0.3;
             }
         }
         else if (output.contains("antialiasing") && output["antialiasing"].get<bool>())
@@ -208,17 +257,21 @@ void RayTracer::run()
             if (output.contains("raysperpixel"))
             {
                 auto rpp = output["raysperpixel"].get<std::vector<int>>();
-
-                if (rpp.size() >= 2)
+                if (rpp.size() == 3)
                 {
                     params.raysperpixel[0] = rpp[0];
                     params.raysperpixel[1] = rpp[1];
-                    params.raysperpixel[2] = 1;
+                    params.raysperpixel[2] = rpp[2];
+                }
+                else if (rpp.size() == 2)
+                {
+                    params.raysperpixel[0] = params.raysperpixel[1] = rpp[0];
+                    params.raysperpixel[2] = rpp[1];
                 }
                 else if (rpp.size() == 1)
                 {
-                    params.raysperpixel[0] = params.raysperpixel[1] = rpp[0];
-                    params.raysperpixel[2] = 1;
+                    params.raysperpixel[0] = 1;
+                    params.raysperpixel[2] = rpp[0];
                 }
             }
             else

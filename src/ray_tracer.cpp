@@ -29,13 +29,17 @@ namespace btoleda
                     {
                         for (int m = 0; m < n; m++)
                         {
-                            ray r{cam.pupil(), (cam.pupil() - (p0 + (i + (k + 0.5) * x_) * delta_x * cam.retina_u() + (j + (l + 0.5) * y_) * delta_y * cam.retina_v())).normalized()};
+                            double x_offset = n > 1 ? random_double() : 0.5;
+                            double y_offset = n > 1 ? random_double() : 0.5;
+                            ray r{cam.pupil(), (cam.pupil() - (p0 + (double(i) + (double(k) + x_offset) * x_) * delta_x * cam.retina_u() + (double(j) + (double(l) + y_offset) * y_) * delta_y * cam.retina_v())).normalized()};
                             pixel_color += _m_scene.trace(r, _m_params);
                         }
                     }
                 }
                 pixel_color *= n_ * y_ * x_;
-                _m_viewport.set_next_pixel(pixel_color.cwiseSqrt()); // Gamma correction
+                if (_m_params.globalillum)
+                    pixel_color = pixel_color.array().pow(0.4); // Gamma correction
+                _m_viewport.set_next_pixel(pixel_color);
             }
         }
     }
