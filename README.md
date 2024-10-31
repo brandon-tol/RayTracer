@@ -20,6 +20,7 @@ cmake ..
 ```
 3. Compile it using the method of your choice.
 For the sake of this project, the build was generated in Visual Studio 2022 and Visual Studio 2019 on Windows, as well as with the g++ compiler on Linux.
+NOTE: It is highly recommended to build in Release mode, regardless of the compiler chosen.
 
 ## Run
 * First, you will need to have a specification file.
